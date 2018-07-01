@@ -1,17 +1,27 @@
 //import type helpers from graphQL
 const {
-GraphQLSchema,
+    GraphQLSchema,
     GraphQLObjectType,
-    GraphQLString
+    GraphQLString,
+    GraphQLNonNull
 } = require('graphql');
+
+const MeType = require('./types/me');
 
 //the root query is where in the data graph we can start asking questions
 const RootQueryType = new GraphQLObjectType({
     name: 'RootQueryType',
+
     fields: {
-        hello: {
-            type: GraphQLString,
-            resolve: () => 'world'
+        me: {
+            type: MeType,
+            description: 'The Current user identified by an api key',
+            args: {
+                key: { type: new GraphQLNonNull(GraphQLString) }
+            },
+            resolve: () => {
+                //read user info from db
+            }
         }
     }
 });
