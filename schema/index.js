@@ -19,8 +19,10 @@ const RootQueryType = new GraphQLObjectType({
             args: {
                 key: { type: new GraphQLNonNull(GraphQLString) }
             },
-            resolve: () => {
-                //read user info from db
+            resolve: (obj, args, ctx) => {
+                ///Read user info from DB
+                // using args.key as the api key
+                //pgPool via the context(ctx) object
             }
         }
     }
