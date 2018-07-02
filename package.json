@@ -26,5 +26,7 @@
     "mongodb": "^2.1.18",
     "pg": "^6.4.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "humps": "^2.0.1"
+  }
 }
