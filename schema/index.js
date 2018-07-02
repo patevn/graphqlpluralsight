@@ -6,6 +6,7 @@ const {
     GraphQLNonNull
 } = require('graphql');
 
+const pgdb = require('../database/pgdb');
 const MeType = require('./types/me');
 
 //the root query is where in the data graph we can start asking questions
@@ -19,10 +20,12 @@ const RootQueryType = new GraphQLObjectType({
             args: {
                 key: { type: new GraphQLNonNull(GraphQLString) }
             },
-            resolve: (obj, args, ctx) => {
+            //{pgPool} he is a destructed context object
+            resolve: (obj, args, { pgPool }) => {
                 ///Read user info from DB
                 // using args.key as the api key
                 //pgPool via the context(ctx) object
+                return pgdb(pgPool).getUser(args.key);
             }
         }
     }
